@@ -1,0 +1,60 @@
+---
+const title = "Jackton Autonomous Media";
+const description = "Sistem Media Otonom 24/7 - Properti & AI Data Intelligence";
+---
+
+<html lang="id">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<style>
+			body {
+				background-color: #0f172a;
+				color: #f8fafc;
+				font-family: 'Inter', sans-serif;
+				margin: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+			}
+			.container {
+				text-align: center;
+				max-width: 800px;
+				padding: 2rem;
+			}
+			h1 {
+				font-size: 3rem;
+				color: #d4af37; /* Gold */
+				margin-bottom: 0.5rem;
+			}
+			p {
+				font-size: 1.2rem;
+				color: #94a3b8;
+				line-height: 1.6;
+			}
+			.status {
+				display: inline-block;
+				margin-top: 2rem;
+				padding: 0.5rem 1rem;
+				border: 1px solid #d4af37;
+				color: #d4af37;
+				border-radius: 99px;
+				font-weight: bold;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>{title}</h1>
+			<p>{description}</p>
+			<div class="status">System Status: 24/7 Autonomous</div>
+			<p style="margin-top: 3rem; font-size: 0.9rem;">Artikel terbaru akan muncul di sini secara otomatis setiap jam 08:00 WIB.</p>
+		</div>
+	</body>
+</html>
