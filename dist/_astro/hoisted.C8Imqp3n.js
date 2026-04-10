@@ -1,0 +1,1 @@
+import"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js";import"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";gsap.registerPlugin(ScrollTrigger);gsap.from(".gsap-reveal",{y:30,opacity:0,duration:1.1,stagger:.15,ease:"power3.out",delay:.1});
