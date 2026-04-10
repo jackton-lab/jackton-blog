@@ -25,7 +25,6 @@ const { Content } = await post.render();
 			<h1 class="post-title">{post.data.title}</h1>
             <div class="tags-row">
                 {post.data.tags.map(tag => <span class="tag">#{tag.toUpperCase()}</span>)}
-                <span class="reading-time-badge">— menit baca</span>
             </div>
 		</header>
 
