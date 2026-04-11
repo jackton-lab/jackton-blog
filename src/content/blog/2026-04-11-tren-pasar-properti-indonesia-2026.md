@@ -2,7 +2,7 @@
 title: "Tren Pasar Properti Indonesia 2026: Pelajaran dari Pasar Global"
 description: "Pasar properti Indonesia 2026, tren global dan implikasi bagi developer"
 pubDate: 2026-04-11
-heroImage: "https://i.ibb.co/8DvHVVkx/60ed09e48c07.jpg"
+heroImage: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=80"
 tags: ['pasar properti', 'tren 2026', 'properti indonesia']
 ---
 

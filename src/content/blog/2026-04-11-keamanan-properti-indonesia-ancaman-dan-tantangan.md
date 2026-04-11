@@ -2,7 +2,7 @@
 title: "Keamanan Properti Indonesia: Ancaman dan Tantangan di Era Digital"
 description: "Keamanan properti Indonesia di era digital, ancaman dan tantangan"
 pubDate: 2026-04-11
-heroImage: "https://i.ibb.co/RGn2gtYn/ebd5a8b3d089.jpg"
+heroImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80"
 tags: ['properti indonesia', 'keamanan digital']
 ---
 

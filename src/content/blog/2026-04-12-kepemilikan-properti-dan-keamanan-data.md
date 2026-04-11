@@ -2,7 +2,7 @@
 title: "Kepemilikan Properti di Indonesia dan Keamanan Data: Pelajaran dari Kasus Sam Altman"
 description: "Apa pelajaran yang dapat dipetik dari kasus Sam Altman untuk kepemilikan properti di Indonesia?"
 pubDate: 2026-04-12
-heroImage: "https://i.ibb.co/67GZbRBr/deea8278b954.jpg"
+heroImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80"
 tags: ['properti indonesia', 'keamanan data']
 ---
 

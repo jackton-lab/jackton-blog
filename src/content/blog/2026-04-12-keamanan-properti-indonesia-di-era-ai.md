@@ -2,7 +2,7 @@
 title: "Keamanan Properti Indonesia di Era AI: Mempelajari dari Kasus Serangan Rumah Sam Altman"
 description: "Keamanan properti Indonesia di era AI, apa yang bisa dipelajari dari kasus serangan rumah Sam Altman?"
 pubDate: 2026-04-12
-heroImage: "https://i.ibb.co/FpT6hFD/02a0391a945b.jpg"
+heroImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80"
 tags: ['keamanan properti', 'AI', 'Indonesia']
 ---
 

@@ -2,7 +2,7 @@
 title: "Kepemilikan Rumah di Indonesia: Menghadapi Tantangan Keamanan dan Privasi"
 description: "Bagaimana keamanan dan privasi mempengaruhi kepemilikan rumah di Indonesia?"
 pubDate: 2026-04-11
-heroImage: "https://i.ibb.co/gMqfQ7B1/58c0474d401f.jpg"
+heroImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80"
 tags: ['properti Indonesia', 'keamanan rumah', 'privasi']
 ---
 
