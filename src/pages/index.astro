@@ -31,7 +31,7 @@ const title = "Intelligence Archive";
             <a href={`/blog/${post.slug}`} class={`report-card gsap-reveal ${i === 0 ? 'card-featured' : ''}`}>
               <div class="card-thumb">
                 {post.data.heroImage ? (
-                  <img src={post.data.heroImage} alt={post.data.title} loading="lazy" />
+                  <img src={post.data.heroImage} alt={post.data.title} decoding="async" />
                 ) : (
                   <div class="card-thumb-placeholder">
                     <svg width="32" height="32" viewBox="0 0 1024 1024" fill="rgba(255,255,255,0.1)">

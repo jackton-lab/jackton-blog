@@ -24,7 +24,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
     <!-- HERO IMAGE -->
     {post.data.heroImage && (
       <div class="post-hero gsap-reveal">
-        <img src={post.data.heroImage} alt={post.data.title} />
+        <img src={post.data.heroImage} alt={post.data.title} decoding="async" />
         <div class="post-hero-overlay"></div>
       </div>
     )}
