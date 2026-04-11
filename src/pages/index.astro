@@ -20,18 +20,26 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
         <div class="grid">
           {posts.map((post, i) => (
             <a href={`/blog/${post.slug}`} class={`card ${i === 0 ? 'card--lead' : ''}`}>
-              <div class="card-image">
-                {post.data.heroImage
-                  ? <img src={post.data.heroImage} alt={post.data.title} loading={i < 3 ? 'eager' : 'lazy'} />
-                  : <div class="card-image--empty" />
-                }
-              </div>
-              <div class="card-body">
-                <p class="card-date">
-                  {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
-                </p>
-                <h2 class="card-title">{post.data.title}</h2>
-                <p class="card-desc">{post.data.description}</p>
+              <div class="card-window">
+                <div class="window-chrome">
+                  <span class="dot dot--red" />
+                  <span class="dot dot--yellow" />
+                  <span class="dot dot--green" />
+                </div>
+                <div class="card-image">
+                  {post.data.heroImage
+                    ? <img src={post.data.heroImage} alt={post.data.title} loading={i < 3 ? 'eager' : 'lazy'} />
+                    : <div class="card-image--empty" />
+                  }
+                </div>
+                <div class="card-body">
+                  <p class="card-date">
+                    {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  </p>
+                  <h2 class="card-title">{post.data.title}</h2>
+                  <p class="card-desc">{post.data.description}</p>
+                  <span class="card-cta">Baca Analisis →</span>
+                </div>
               </div>
             </a>
           ))}
@@ -48,16 +56,16 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 <style>
   main {
-    max-width: 1160px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px 120px;
+    padding: 0 32px 160px;
   }
 
   /* ── HEADER ─────────────────────────────── */
   .header {
     padding: 160px 0 80px;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 72px;
+    margin-bottom: 80px;
   }
   .label {
     font-family: 'DM Mono', monospace;
@@ -86,94 +94,134 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   .grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
+    gap: 28px;
   }
 
-  /* ── CARD ────────────────────────────────── */
+  /* ── CARD LINK WRAPPER ───────────────────── */
   .card {
-    background: var(--bg);
+    grid-column: span 4;
     text-decoration: none;
     color: inherit;
+    display: block;
+  }
+  .card--lead { grid-column: span 8; }
+
+  /* ── APPLE WINDOW ────────────────────────── */
+  .card-window {
+    background: rgba(18, 18, 20, 0.72);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.12),
+      0 8px 24px rgba(0,0,0,0.32),
+      0 24px 64px rgba(0,0,0,0.28),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+    height: 100%;
     display: flex;
     flex-direction: column;
-    grid-column: span 4;
-    transition: background 0.25s;
-    overflow: hidden;
   }
-  .card:hover { background: #0c0c0c; }
-  .card:hover .card-image img { transform: scale(1.03); }
+  .card:hover .card-window {
+    transform: translateY(-6px) scale(1.005);
+    box-shadow:
+      0 4px 8px rgba(0,0,0,0.16),
+      0 16px 40px rgba(0,0,0,0.4),
+      0 40px 80px rgba(0,0,0,0.32),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+  }
 
-  /* Lead card — primeiro artigo ocupa 8 colunas */
-  .card--lead {
-    grid-column: span 8;
-    flex-direction: row;
-  }
-  .card--lead .card-image {
-    width: 55%;
-    aspect-ratio: auto;
+  /* ── WINDOW CHROME ───────────────────────── */
+  .window-chrome {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     flex-shrink: 0;
-    height: 100%;
   }
-  .card--lead .card-body { padding: 40px 36px; }
-  .card--lead .card-title { font-size: 24px; }
+  .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .dot--red    { background: #ff5f57; }
+  .dot--yellow { background: #ffbd2e; }
+  .dot--green  { background: #28c840; }
 
-  /* ── CARD IMAGE ──────────────────────────── */
+  /* ── IMAGE ───────────────────────────────── */
   .card-image {
-    aspect-ratio: 16/10;
+    aspect-ratio: 16/9;
     overflow: hidden;
     background: #0d0d0d;
     flex-shrink: 0;
   }
+  .card--lead .card-image { aspect-ratio: 16/7; }
   .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    opacity: 1 !important;
-    filter: brightness(0.85) saturate(0.75);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: brightness(0.88) saturate(0.8);
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1),
+                filter 0.4s ease;
   }
-  .card-image--empty {
-    width: 100%;
-    height: 100%;
-    background: #0d0d0d;
+  .card:hover .card-image img {
+    transform: scale(1.04);
+    filter: brightness(0.95) saturate(0.9);
   }
+  .card-image--empty { width:100%; height:100%; background:#111; }
 
   /* ── CARD BODY ───────────────────────────── */
   .card-body {
-    padding: 28px 28px 32px;
+    padding: 24px 24px 28px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     flex: 1;
   }
   .card-date {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 1px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
     color: var(--muted);
-    opacity: 0.5;
+    opacity: 0.45;
+    text-transform: uppercase;
   }
   .card-title {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.45;
     letter-spacing: -0.02em;
     color: var(--fg);
   }
+  .card--lead .card-title { font-size: 22px; line-height: 1.3; }
   .card-desc {
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--muted);
-    line-height: 1.65;
+    line-height: 1.7;
     font-weight: 300;
-    opacity: 0.7;
+    opacity: 0.65;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    flex: 1;
   }
+  .card-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-top: 4px;
+  }
+  .card:hover .card-cta { opacity: 0.5; }
 
   /* ── EMPTY ───────────────────────────────── */
   .empty {
@@ -187,12 +235,11 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   }
 
   /* ── RESPONSIVE ──────────────────────────── */
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     main { padding: 0 20px 80px; }
     .header { padding: 120px 0 60px; }
-    .grid { grid-template-columns: 1fr; }
-    .card, .card--lead { grid-column: span 1; flex-direction: column; }
-    .card--lead .card-image { width: 100%; height: auto; }
-    .card--lead .card-body { padding: 24px; }
+    .grid { grid-template-columns: 1fr; gap: 20px; }
+    .card, .card--lead { grid-column: span 1; }
+    .card--lead .card-image { aspect-ratio: 16/9; }
   }
 </style>
