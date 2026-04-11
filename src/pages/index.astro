@@ -4,221 +4,195 @@ import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog');
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-function formatDate(d: Date) {
-  return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-}
 ---
 
 <Layout title="Intelligence Archive">
+  <main>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-inner">
-      <p class="hero-eyebrow">JACKTON INTELLIGENCE</p>
-      <h1 class="hero-title">Property<br/><em>Signals.</em></h1>
-      <p class="hero-sub">Analisis pasar properti Indonesia — dikurasi dan diproses AI setiap hari dari sumber global dan lokal.</p>
-    </div>
-  </section>
+    <section class="header">
+      <p class="label">JACKTON INTELLIGENCE</p>
+      <h1>Market<br/>Signals.</h1>
+      <p class="sub">Insight properti Indonesia — dikurasi dan dianalisis setiap hari.</p>
+    </section>
 
-  <!-- ARTICLE GRID -->
-  <main class="main">
-    {posts.length === 0 ? (
-      <div class="empty">
-        <p>Pipeline aktif. Artikel pertama terbit pukul 08:00 WIB.</p>
-      </div>
-    ) : (
-      <div class="grid">
-        {posts.map((post, i) => (
-          <a href={`/blog/${post.slug}`} class={`card ${i === 0 ? 'card--hero' : ''}`}>
-            <div class="card-img">
-              {post.data.heroImage
-                ? <img src={post.data.heroImage} alt={post.data.title} loading={i < 2 ? 'eager' : 'lazy'} />
-                : <div class="card-img-fallback" />
-              }
-              <div class="card-img-overlay" />
-            </div>
-            <div class="card-content">
-              <p class="card-date">{formatDate(post.data.pubDate)}</p>
-              <h2 class="card-title">{post.data.title}</h2>
-              {post.data.description && i === 0 && (
+    <section class="grid-section">
+      {posts.length > 0 ? (
+        <div class="grid">
+          {posts.map((post, i) => (
+            <a href={`/blog/${post.slug}`} class={`card ${i === 0 ? 'card--lead' : ''}`}>
+              <div class="card-image">
+                {post.data.heroImage
+                  ? <img src={post.data.heroImage} alt={post.data.title} loading={i < 3 ? 'eager' : 'lazy'} />
+                  : <div class="card-image--empty" />
+                }
+              </div>
+              <div class="card-body">
+                <p class="card-date">
+                  {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </p>
+                <h2 class="card-title">{post.data.title}</h2>
                 <p class="card-desc">{post.data.description}</p>
-              )}
-              <span class="card-arrow">Baca →</span>
-            </div>
-          </a>
-        ))}
-      </div>
-    )}
-  </main>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="empty">
+          <p>Pipeline aktif — artikel pertama terbit 08:00 WIB.</p>
+        </div>
+      )}
+    </section>
 
+  </main>
 </Layout>
 
 <style>
-  /* ── HERO ────────────────────────────────── */
-  .hero {
-    padding: 160px 48px 80px;
+  main {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  .header {
+    padding: 160px 0 80px;
     border-bottom: 1px solid var(--border);
+    margin-bottom: 72px;
   }
-  .hero-inner { max-width: 1160px; margin: 0 auto; }
-
-  .hero-eyebrow {
-    font-family: var(--font-display);
-    font-size: 10px; letter-spacing: 4px;
-    color: var(--muted); margin-bottom: 32px;
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 28px;
   }
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(60px, 9vw, 120px);
-    font-weight: 300;
-    letter-spacing: -0.05em;
-    line-height: 0.92;
+  .header h1 {
+    font-size: clamp(56px, 8vw, 104px);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
     color: var(--fg);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
-  .hero-title em {
-    font-style: italic;
+  .sub {
+    font-size: 15px;
+    color: var(--muted);
     font-weight: 300;
-    color: var(--accent);
-  }
-  .hero-sub {
-    font-size: 15px; color: var(--muted);
-    font-weight: 400; line-height: 1.65;
-    max-width: 420px;
-  }
-
-  /* ── MAIN ────────────────────────────────── */
-  .main {
-    max-width: 1160px; margin: 0 auto;
-    padding: 72px 48px 120px;
+    max-width: 380px;
+    line-height: 1.6;
   }
 
   /* ── GRID ────────────────────────────────── */
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
   }
 
-  /* ── CARD BASE ───────────────────────────── */
+  /* ── CARD ────────────────────────────────── */
   .card {
-    text-decoration: none; color: inherit;
-    background: var(--surface);
-    border-radius: 20px;
+    background: var(--bg);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    grid-column: span 4;
+    transition: background 0.25s;
     overflow: hidden;
-    display: flex; flex-direction: column;
-    /* 3D Apple-style depth shadow */
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.05) inset,
-      0 4px 12px rgba(0,0,0,0.4),
-      0 24px 60px rgba(0,0,0,0.35);
-    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
-                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
-    will-change: transform;
   }
-  .card:hover {
-    transform: translateY(-6px);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.06) inset,
-      0 8px 24px rgba(0,0,0,0.5),
-      0 40px 80px rgba(0,0,0,0.45);
-  }
-  .card:hover .card-img img { transform: scale(1.04); }
-  .card:hover .card-arrow { letter-spacing: 2px; }
+  .card:hover { background: #0c0c0c; }
+  .card:hover .card-image img { transform: scale(1.03); }
 
-  /* ── HERO CARD ───────────────────────────── */
-  .card--hero {
-    grid-column: span 3;
+  /* Lead card — primeiro artigo ocupa 8 colunas */
+  .card--lead {
+    grid-column: span 8;
     flex-direction: row;
-    min-height: 420px;
   }
-  .card--hero .card-img {
-    width: 58%; aspect-ratio: auto; height: auto;
+  .card--lead .card-image {
+    width: 55%;
+    aspect-ratio: auto;
+    flex-shrink: 0;
+    height: 100%;
   }
-  .card--hero .card-content {
-    padding: 48px 44px;
-    justify-content: flex-end;
-  }
-  .card--hero .card-title {
-    font-size: clamp(22px, 2.8vw, 36px);
-    line-height: 1.2;
-  }
+  .card--lead .card-body { padding: 40px 36px; }
+  .card--lead .card-title { font-size: 24px; }
 
   /* ── CARD IMAGE ──────────────────────────── */
-  .card-img {
-    position: relative;
+  .card-image {
     aspect-ratio: 16/10;
     overflow: hidden;
     background: #0d0d0d;
     flex-shrink: 0;
   }
-  .card-img img {
-    width: 100%; height: 100%; object-fit: cover;
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
     opacity: 1 !important;
-    filter: brightness(0.8) saturate(0.65);
-    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    filter: brightness(0.85) saturate(0.75);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .card-img-fallback {
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
-  }
-  .card-img-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 50%, rgba(17,17,17,0.9) 100%);
+  .card-image--empty {
+    width: 100%;
+    height: 100%;
+    background: #0d0d0d;
   }
 
-  /* ── CARD CONTENT ────────────────────────── */
-  .card-content {
-    padding: 24px 26px 28px;
-    display: flex; flex-direction: column; gap: 10px;
+  /* ── CARD BODY ───────────────────────────── */
+  .card-body {
+    padding: 28px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     flex: 1;
   }
   .card-date {
-    font-family: var(--font-display);
-    font-size: 10px; letter-spacing: 1.5px;
-    color: var(--muted); opacity: 0.6;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    opacity: 0.5;
   }
   .card-title {
-    font-family: var(--font-display);
-    font-size: 17px; font-weight: 500;
-    line-height: 1.35; letter-spacing: -0.02em;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
     color: var(--fg);
-    flex: 1;
   }
   .card-desc {
-    font-size: 14px; color: var(--muted);
-    line-height: 1.7; font-weight: 400;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+    opacity: 0.7;
     display: -webkit-box;
-    -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-  .card-arrow {
-    font-family: var(--font-display);
-    font-size: 11px; letter-spacing: 1px;
-    color: var(--accent); margin-top: 8px;
-    transition: letter-spacing 0.3s;
   }
 
   /* ── EMPTY ───────────────────────────────── */
   .empty {
-    padding: 120px 0; text-align: center;
-    font-family: var(--font-display);
-    font-size: 13px; color: var(--muted);
-    letter-spacing: 1px; opacity: 0.4;
+    padding: 120px 0;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    opacity: 0.4;
   }
 
   /* ── RESPONSIVE ──────────────────────────── */
-  @media (max-width: 1024px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-    .card--hero { grid-column: span 2; }
-  }
-  @media (max-width: 700px) {
-    .hero { padding: 120px 20px 60px; }
-    .main { padding: 48px 20px 80px; }
-    .grid { grid-template-columns: 1fr; gap: 16px; }
-    .card--hero { grid-column: span 1; flex-direction: column; min-height: auto; }
-    .card--hero .card-img { width: 100%; }
-    .card--hero .card-content { padding: 24px; }
+  @media (max-width: 900px) {
+    main { padding: 0 20px 80px; }
+    .header { padding: 120px 0 60px; }
+    .grid { grid-template-columns: 1fr; }
+    .card, .card--lead { grid-column: span 1; flex-direction: column; }
+    .card--lead .card-image { width: 100%; height: auto; }
+    .card--lead .card-body { padding: 24px; }
   }
 </style>
