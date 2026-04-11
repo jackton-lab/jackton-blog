@@ -31,13 +31,34 @@ const title = "Intelligence Archive";
 				<div class="report-grid">
 					{posts.map((post) => (
 						<a href={`/blog/${post.slug}`} class="report-card gsap-reveal">
+							{/* THUMBNAIL */}
+							{post.data.heroImage && (
+								<div class="card-thumb">
+									<img
+										src={post.data.heroImage}
+										alt={post.data.title}
+										loading="lazy"
+									/>
+								</div>
+							)}
+							{/* KONTEN CARD */}
 							<div class="card-content">
+								<div class="card-tags">
+									{post.data.tags.slice(0, 3).map(tag => (
+										<span class="tag">#{tag.toUpperCase()}</span>
+									))}
+								</div>
 								<h2 class="card-title">{post.data.title}</h2>
-								<div class="card-meta">
-									<span class="card-date">{post.data.pubDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }).toUpperCase()}</span>
-									<div class="card-tags">
-										{post.data.tags.map(tag => <span class="tag">#{tag.toUpperCase()}</span>)}
-									</div>
+								{post.data.description && (
+									<p class="card-desc">{post.data.description}</p>
+								)}
+								<div class="card-footer">
+									<span class="card-date">
+										{post.data.pubDate.toLocaleDateString('id-ID', {
+											year: 'numeric', month: 'short', day: 'numeric'
+										}).toUpperCase()}
+									</span>
+									<span class="card-read">BACA →</span>
 								</div>
 							</div>
 						</a>
@@ -60,20 +81,17 @@ const title = "Intelligence Archive";
 	}
 
 	/* HERO */
-	.hero {
-		text-align: center;
-		margin-bottom: 80px;
-	}
+	.hero { text-align: center; margin-bottom: 60px; }
 	.hero-title {
 		font-size: clamp(40px, 6vw, 72px);
 		font-weight: 600;
 		letter-spacing: -0.04em;
 		line-height: 1;
-		margin-bottom: 24px;
+		margin-bottom: 20px;
 		color: var(--fg);
 	}
 	.hero-sub {
-		font-size: clamp(16px, 2vw, 20px);
+		font-size: clamp(15px, 2vw, 18px);
 		color: var(--muted);
 		font-weight: 300;
 	}
@@ -93,49 +111,63 @@ const title = "Intelligence Archive";
 		letter-spacing: 2px;
 		color: var(--muted);
 	}
-	.stats-divider {
-		opacity: 0.3;
-	}
+	.stats-divider { opacity: 0.3; }
 
 	/* GRID */
 	.report-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-		gap: 24px;
+		grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+		gap: 2px;
 	}
+
+	/* CARD */
 	.report-card {
-		background: #0a0a0a;
+		background: #080808;
 		border: 1px solid var(--border);
-		padding: 32px;
 		text-decoration: none;
-		transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+		color: inherit;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
-		min-height: 200px;
+		transition: border-color 0.3s ease, background 0.3s ease;
+		overflow: hidden;
 	}
 	.report-card:hover {
-		border-color: #fff;
-		transform: translateY(-4px);
+		border-color: rgba(255,255,255,0.25);
+		background: #0f0f0f;
 	}
-	.card-title {
-		font-size: 20px;
-		font-weight: 500;
-		line-height: 1.4;
-		color: var(--fg);
-		margin-bottom: 40px;
+	.report-card:hover .card-read {
+		opacity: 1;
 	}
-	.card-meta {
+
+	/* THUMBNAIL */
+	.card-thumb {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: #111;
+	}
+	.card-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+		filter: brightness(0.85);
+	}
+	.report-card:hover .card-thumb img {
+		transform: scale(1.04);
+		filter: brightness(1);
+	}
+
+	/* CARD CONTENT */
+	.card-content {
+		padding: 28px 28px 24px;
 		display: flex;
 		flex-direction: column;
+		flex: 1;
 		gap: 12px;
 	}
-	.card-date {
-		font-family: monospace;
-		font-size: 10px;
-		color: var(--muted);
-		letter-spacing: 1px;
-	}
+
 	.card-tags {
 		display: flex;
 		flex-wrap: wrap;
@@ -143,15 +175,59 @@ const title = "Intelligence Archive";
 	}
 	.tag {
 		font-family: monospace;
-		font-size: 10px;
-		color: var(--accent);
-		opacity: 0.7;
+		font-size: 9px;
+		color: var(--muted);
+		letter-spacing: 1.5px;
+		opacity: 0.6;
+	}
+
+	.card-title {
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1.4;
+		color: var(--fg);
+		letter-spacing: -0.01em;
+	}
+
+	.card-desc {
+		font-size: 13px;
+		color: var(--muted);
+		line-height: 1.6;
+		font-weight: 300;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.card-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: auto;
+		padding-top: 16px;
+		border-top: 1px solid var(--border);
+	}
+	.card-date {
+		font-family: monospace;
+		font-size: 9px;
+		color: var(--muted);
+		letter-spacing: 1px;
+		opacity: 0.6;
+	}
+	.card-read {
+		font-family: monospace;
+		font-size: 9px;
+		letter-spacing: 2px;
+		color: var(--fg);
+		opacity: 0;
+		transition: opacity 0.3s;
 	}
 
 	/* EMPTY STATE */
 	.empty-state {
 		text-align: center;
-		padding: 100px 0;
+		padding: 120px 0;
 		color: var(--muted);
 		font-family: monospace;
 		font-size: 13px;
@@ -160,8 +236,9 @@ const title = "Intelligence Archive";
 
 	@media (max-width: 768px) {
 		.container { padding: 120px 24px 60px; }
-		.hero { margin-bottom: 60px; }
+		.hero { margin-bottom: 48px; }
 		.stats-bar { flex-wrap: wrap; gap: 8px; font-size: 9px; }
-		.report-grid { grid-template-columns: 1fr; }
+		.report-grid { grid-template-columns: 1fr; gap: 1px; }
+		.card-content { padding: 20px; }
 	}
 </style>
