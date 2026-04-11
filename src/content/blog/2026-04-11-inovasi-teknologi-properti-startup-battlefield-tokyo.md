@@ -2,7 +2,7 @@
 title: "Inovasi Teknologi di Sektor Properti: Pelajaran dari Startup Battlefield di Tokyo"
 description: "Pelajaran dari Startup Battlefield di Tokyo untuk sektor properti Indonesia"
 pubDate: 2026-04-11
-heroImage: "/post_landscape.jpg"
+heroImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80"
 tags: ['properti Indonesia', 'teknologi', 'startup']
 ---
 

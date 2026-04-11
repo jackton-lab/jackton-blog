@@ -14,68 +14,50 @@ type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await post.render();
 const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
-  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  day: 'numeric', month: 'long', year: 'numeric'
 });
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-  <article class="post-wrap">
+  <article>
 
-    <!-- HERO IMAGE -->
+    <!-- HERO -->
     {post.data.heroImage && (
-      <div class="post-hero gsap-reveal">
-        <img src={post.data.heroImage} alt={post.data.title} decoding="async" />
-        <div class="post-hero-overlay"></div>
+      <div class="hero">
+        <img src={post.data.heroImage} alt={post.data.title} loading="eager" />
+        <div class="hero-fade" />
       </div>
     )}
 
-    <div class="post-container">
+    <div class="container">
 
-      <!-- HEADER -->
-      <header class="post-header gsap-reveal">
-        <div class="header-top">
-          <a href="/" class="back-link">
-            <span class="back-arrow">←</span> ARCHIVE
-          </a>
-          <span class="reading-time-badge">— menit baca</span>
-        </div>
-        <div class="post-tags">
-          {post.data.tags.map(tag => (
-            <span class="post-tag">{tag.toUpperCase()}</span>
-          ))}
-        </div>
+      <!-- META -->
+      <header class="post-header">
+        <a href="/" class="back">← Semua Artikel</a>
+        <p class="post-date">{formattedDate}</p>
         <h1 class="post-title">{post.data.title}</h1>
-        <p class="post-meta">
-          <span class="post-date">{formattedDate}</span>
-          <span class="post-source">Jackton Intelligence Pipeline</span>
-        </p>
       </header>
 
-      <div class="post-divider gsap-reveal"></div>
+      <div class="divider" />
 
-      <!-- BODY -->
-      <div class="post-content gsap-reveal">
+      <!-- KONTEN -->
+      <div class="post-body">
         <Content />
       </div>
 
       <!-- FOOTER -->
-      <footer class="post-footer gsap-reveal">
-        <div class="signal-box">
-          <div class="signal-box-header">
-            <span class="signal-dot"></span>
-            <span class="signal-label">JACKTON INTELLIGENCE SIGNAL</span>
-          </div>
-          <p class="signal-text">
-            Laporan ini dihasilkan oleh pipeline media otonom Jackton — kurasi harian dari sinyal pasar properti Indonesia.
-            Akses data lengkap dan analisis mendalam di platform utama.
+      <footer class="post-footer">
+        <div class="footer-box">
+          <p class="footer-label">JACKTON INTELLIGENCE</p>
+          <p class="footer-text">
+            Laporan ini dihasilkan oleh pipeline media otonom Jackton —<br />
+            kurasi harian dari sinyal pasar properti Indonesia.
           </p>
-          <a href="https://jackton.xyz" target="_blank" class="signal-cta">
+          <a href="https://jackton.xyz" target="_blank" class="footer-cta">
             Akses Jackton Platform →
           </a>
         </div>
-        <div class="footer-nav">
-          <a href="/" class="footer-back">← Kembali ke Archive</a>
-        </div>
+        <a href="/" class="footer-back">← Kembali ke Semua Artikel</a>
       </footer>
 
     </div>
@@ -83,204 +65,112 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
 </Layout>
 
 <style is:global>
-  .post-content { color: var(--fg); line-height: 1.85; font-size: 1.08rem; font-weight: 300; }
-  .post-content p { margin-bottom: 1.8rem; opacity: 0.88; }
-  .post-content h2 {
-    color: var(--fg);
-    margin: 3.5rem 0 1.2rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
+  .post-body { color: var(--fg); line-height: 1.9; font-size: 1.06rem; font-weight: 300; }
+  .post-body p { margin-bottom: 1.8rem; opacity: 0.85; }
+  .post-body h2 {
+    font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em;
+    color: var(--fg); margin: 3.2rem 0 1rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
   }
-  .post-content h3 {
-    color: var(--fg);
-    margin: 2.5rem 0 1rem;
-    font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+  .post-body h3 { font-size: 1.05rem; font-weight: 500; margin: 2rem 0 0.8rem; color: var(--fg); }
+  .post-body strong { color: #fff; font-weight: 500; }
+  .post-body ul, .post-body ol { margin-bottom: 1.8rem; padding-left: 20px; }
+  .post-body li { margin-bottom: 0.5rem; opacity: 0.85; line-height: 1.7; }
+  .post-body a { color: var(--fg); border-bottom: 1px solid var(--border); text-decoration: none; }
+  .post-body a:hover { border-color: rgba(255,255,255,0.35); }
+  .post-body blockquote {
+    border-left: 2px solid rgba(255,255,255,0.12); padding: 16px 24px;
+    margin: 2rem 0; color: var(--muted); font-style: italic;
   }
-  .post-content blockquote {
-    border-left: 2px solid rgba(255,255,255,0.15);
-    padding: 20px 24px;
-    background: rgba(255,255,255,0.02);
-    border-radius: 0 8px 8px 0;
-    margin: 2.5rem 0;
-    font-style: italic;
-    color: var(--muted);
-  }
-  .post-content strong { color: #fff; font-weight: 600; }
-  .post-content ul, .post-content ol { margin-bottom: 1.8rem; padding-left: 24px; }
-  .post-content li { margin-bottom: 0.6rem; opacity: 0.88; line-height: 1.7; }
-  .post-content a { color: var(--fg); border-bottom: 1px solid var(--border); text-decoration: none; transition: border-color 0.2s; }
-  .post-content a:hover { border-color: rgba(255,255,255,0.4); }
 </style>
 
 <style>
-  /* HERO IMAGE FULL WIDTH */
-  .post-hero {
-    width: 100%;
-    height: 480px;
-    position: relative;
-    overflow: hidden;
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    width: 100%; height: 520px;
+    position: relative; overflow: hidden;
     background: #0a0a0a;
   }
-  .post-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.75) saturate(0.8);
+  .hero img {
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 1 !important;
+    filter: brightness(0.65) saturate(0.6);
     display: block;
   }
-  .post-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 40%, var(--bg) 100%);
+  .hero-fade {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, var(--bg) 100%);
   }
 
-  /* CONTAINER */
-  .post-container { max-width: 720px; margin: 0 auto; padding: 0 24px 120px; }
-
-  /* HEADER */
-  .post-header { padding-top: 60px; margin-bottom: 48px; }
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-  }
-  .back-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-decoration: none;
-    color: var(--muted);
-    transition: color 0.2s;
-  }
-  .back-link:hover { color: var(--fg); }
-  .back-arrow { font-size: 12px; }
-
-  .post-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-  .post-tag {
-    font-family: monospace;
-    font-size: 8px;
-    color: var(--muted);
-    letter-spacing: 1.5px;
-    padding: 3px 10px;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 100px;
-    opacity: 0.6;
+  /* ── CONTAINER ───────────────────────────── */
+  .container {
+    max-width: 720px; margin: 0 auto;
+    padding: 0 24px 120px;
   }
 
-  .post-title {
-    font-size: clamp(28px, 4.5vw, 52px);
-    font-weight: 600;
-    line-height: 1.12;
-    letter-spacing: -0.04em;
-    color: var(--fg);
-    margin-bottom: 24px;
-  }
-
-  .post-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .post-date {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 300;
-    text-transform: capitalize;
-  }
-  .post-source {
-    font-family: monospace;
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 1.5px;
-    opacity: 0.4;
-    padding: 2px 10px;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 100px;
-  }
-
-  /* DIVIDER */
-  .post-divider { border: 0; height: 1px; background: var(--border); margin-bottom: 56px; }
-
-  /* SIGNAL BOX (footer) */
-  .post-footer { margin-top: 80px; }
-  .signal-box {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px;
-    margin-bottom: 48px;
-  }
-  .signal-box-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .signal-dot {
-    width: 6px; height: 6px;
-    background: #22c55e;
-    border-radius: 50%;
-    box-shadow: 0 0 8px rgba(34,197,94,0.6);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .signal-label {
-    font-family: monospace;
-    font-size: 9px;
-    letter-spacing: 2.5px;
-    color: var(--muted);
-    opacity: 0.6;
-  }
-  .signal-text {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.8;
-    font-weight: 300;
-    margin-bottom: 24px;
-    opacity: 0.8;
-  }
-  .signal-cta {
+  /* ── HEADER ──────────────────────────────── */
+  .post-header { padding-top: 56px; margin-bottom: 48px; }
+  .back {
     display: inline-block;
-    background: var(--fg);
-    color: var(--bg);
-    padding: 12px 28px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .signal-cta:hover { opacity: 0.85; transform: translateY(-1px); }
-
-  .footer-nav { text-align: center; }
-  .footer-back {
-    font-family: monospace;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    text-decoration: none;
-    opacity: 0.5;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--muted); text-decoration: none;
+    margin-bottom: 32px; opacity: 0.5;
     transition: opacity 0.2s;
   }
-  .footer-back:hover { opacity: 1; }
+  .back:hover { opacity: 1; }
+  .post-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 1.5px;
+    color: var(--muted); opacity: 0.4;
+    margin-bottom: 20px;
+  }
+  .post-title {
+    font-size: clamp(28px, 4.5vw, 50px);
+    font-weight: 500; line-height: 1.1;
+    letter-spacing: -0.04em; color: var(--fg);
+  }
+
+  /* ── DIVIDER ─────────────────────────────── */
+  .divider { height: 1px; background: var(--border); margin-bottom: 56px; }
+
+  /* ── FOOTER ──────────────────────────────── */
+  .post-footer { margin-top: 80px; }
+  .footer-box {
+    border: 1px solid var(--border);
+    padding: 40px; margin-bottom: 48px;
+  }
+  .footer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--muted); opacity: 0.4;
+    margin-bottom: 16px;
+  }
+  .footer-text {
+    font-size: 14px; color: var(--muted);
+    line-height: 1.75; font-weight: 300;
+    margin-bottom: 28px; opacity: 0.7;
+  }
+  .footer-cta {
+    display: inline-block;
+    background: var(--fg); color: var(--bg);
+    padding: 12px 28px; font-size: 11px;
+    font-weight: 600; letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .footer-cta:hover { opacity: 0.8; }
+  .footer-back {
+    display: block; text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 1.5px;
+    color: var(--muted); text-decoration: none;
+    opacity: 0.3; transition: opacity 0.2s;
+  }
+  .footer-back:hover { opacity: 0.8; }
 
   @media (max-width: 768px) {
-    .post-hero { height: 280px; }
-    .post-header { padding-top: 40px; }
-    .signal-box { padding: 24px; }
+    .hero { height: 300px; }
+    .footer-box { padding: 28px 24px; }
   }
 </style>

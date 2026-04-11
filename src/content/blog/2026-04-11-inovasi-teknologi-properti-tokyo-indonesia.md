@@ -2,7 +2,7 @@
 title: "Inovasi Teknologi di Sektor Properti: Pelajaran dari Tokyo untuk Indonesia"
 description: "Teknologi AI dan startup membantu meningkatkan sektor properti di Tokyo, apa implikasinya untuk Indonesia?"
 pubDate: 2026-04-11
-heroImage: "/post_landscape.jpg"
+heroImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80"
 tags: ['properti indonesia', 'teknologi', 'startup']
 ---
 

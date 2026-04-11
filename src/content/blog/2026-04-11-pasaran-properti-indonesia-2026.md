@@ -2,7 +2,7 @@
 title: "Pasaran Properti Indonesia 2026: Tren dan Tantangan"
 description: "Tren pasaran properti global dan implikasinya bagi Indonesia"
 pubDate: 2026-04-11
-heroImage: "/post_landscape.jpg"
+heroImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80"
 tags: ['properti indonesia', 'pasar properti']
 ---
 
