@@ -32,11 +32,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
 
       <!-- WINDOW CHROME (macOS-style title bar) -->
       <div class="window-chrome">
-        <div class="traffic-lights">
-          <span class="dot dot--red"></span>
-          <span class="dot dot--yellow"></span>
-          <span class="dot dot--green"></span>
-        </div>
         <a href="/" class="chrome-back">← Semua Artikel</a>
         <div class="chrome-spacer"></div>
       </div>
@@ -166,16 +161,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
     background: rgba(255,255,255,0.03);
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .traffic-lights { display: flex; gap: 8px; align-items: center; }
-  .dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    display: block;
-    opacity: 0.85;
-  }
-  .dot--red    { background: #ff5f57; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.2); }
-  .dot--yellow { background: #ffbd2e; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.2); }
-  .dot--green  { background: #28ca42; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.2); }
   .chrome-back {
     font-family: 'DM Mono', monospace;
     font-size: 10px; letter-spacing: 1.5px;
