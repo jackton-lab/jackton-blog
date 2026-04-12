@@ -12,7 +12,7 @@ Sistem pipeline media otonom Jackton resmi aktif. Mulai hari ini, artikel di blo
 
 Pipeline berjalan di GitHub Actions tanpa server. Setiap pagi, sistem membaca RSS feed dari sumber properti dan teknologi terpilih, memilih artikel paling relevan berdasarkan keyword scoring, lalu menggunakan AI untuk menulis ulang dalam perspektif pasar Indonesia.
 
-Hasilnya didistribusikan ke tiga channel secara bersamaan: blog ini untuk SEO organik, LinkedIn untuk audiens B2B profesional, dan Instagram untuk awareness pasar yang lebih luas.
+Hasilnya didistribusikan ke dua channel utama: blog ini untuk SEO organik, dan Instagram untuk awareness pasar yang lebih luas.
 
 ## Apa yang Akan Kamu Temukan di Sini
 
