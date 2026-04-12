@@ -26,7 +26,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
       {post.data.heroImage && (
         <div class="hero">
           <img src={post.data.heroImage} alt={post.data.title} loading="eager" decoding="async" />
-          <div class="hero-fade" />
         </div>
       )}
 
@@ -70,30 +69,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
     </article>
   </div>
 </Layout>
-
-<script>
-  // Interactive 3D tilt on mouse move
-  const card = document.getElementById('article-card');
-  if (card) {
-    let raf: number;
-    document.addEventListener('mousemove', (e) => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const rect = card.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) / (window.innerWidth / 2);
-        const dy = (e.clientY - cy) / (window.innerHeight / 2);
-        const rotX = -dy * 2.5;
-        const rotY = dx * 2.5;
-        card.style.transform = `perspective(1400px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`;
-      });
-    });
-    document.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1400px) rotateX(0deg) rotateY(0deg) translateZ(0)';
-    });
-  }
-</script>
 
 <style is:global>
   .post-body {
@@ -147,9 +122,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
       0 64px 120px rgba(0,0,0,0.20);
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
-    transition: box-shadow 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.15s ease-out;
-    transform-style: preserve-3d;
-    will-change: transform;
   }
 
   /* ── WINDOW CHROME (macOS title bar) ── */
@@ -158,7 +130,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
     align-items: center;
     gap: 12px;
     padding: 14px 20px;
-    background: rgba(255,255,255,0.03);
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .chrome-back {
@@ -180,19 +151,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
   .hero img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
-    transition: transform 0.6s ease;
-  }
-  .article-card:hover .hero img { transform: scale(1.02); }
-
-  /* Fade hanya di bawah — tidak menutup gambar */
-  .hero-fade {
-    position: absolute; inset: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 45%,
-      rgba(18, 18, 20, 0.55) 80%,
-      rgba(18, 18, 20, 0.88) 100%
-    );
   }
 
   /* ── CONTENT ── */
