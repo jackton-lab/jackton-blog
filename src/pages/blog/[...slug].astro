@@ -134,13 +134,15 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
   /* ── HERO ── */
   .hero {
     position: relative;
-    height: 340px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #080809;
   }
   .hero img {
     width: 100%; height: 100%;
-    object-fit: cover; display: block;
+    object-fit: cover; 
+    display: block;
   }
 
   /* ── CONTENT ── */
