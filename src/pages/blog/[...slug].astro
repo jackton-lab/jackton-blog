@@ -29,12 +29,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
         </div>
       )}
 
-      <!-- WINDOW CHROME (macOS-style title bar) -->
-      <div class="window-chrome">
-        <a href="/" class="chrome-back">← Semua Artikel</a>
-        <div class="chrome-spacer"></div>
-      </div>
-
       <!-- CONTENT -->
       <div class="content">
         <header class="post-header">
@@ -62,11 +56,13 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
               Buka Jackton Platform →
             </a>
           </div>
-          <a href="/" class="footer-back">← Kembali ke Semua Artikel</a>
         </footer>
       </div>
 
     </article>
+
+    <!-- BACK NAV — Moved below the card, no box, clean text -->
+    <a href="/" class="global-back-nav">← Kembali ke Semua Artikel</a>
   </div>
 </Layout>
 
@@ -101,11 +97,11 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
     min-height: 100vh;
     padding: 112px 24px 140px;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
   }
 
-  /* ── FLOATING CARD — Apple macOS glass window ── */
+  /* ── ARTICLE CARD ── */
   .article-card {
     width: 100%;
     max-width: 800px;
@@ -122,24 +118,18 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
       0 64px 120px rgba(0,0,0,0.20);
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
+    margin-bottom: 40px;
   }
 
-  /* ── WINDOW CHROME (macOS title bar) ── */
-  .window-chrome {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .chrome-back {
+  /* ── BACK NAV ── */
+  .global-back-nav {
     font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 1.5px;
+    font-size: 11px; letter-spacing: 1.5px;
     color: var(--muted); text-decoration: none;
-    opacity: 0.45; transition: opacity 0.2s;
+    opacity: 0.3; transition: opacity 0.2s, transform 0.2s;
+    text-transform: uppercase;
   }
-  .chrome-back:hover { opacity: 0.9; }
-  .chrome-spacer { flex: 1; }
+  .global-back-nav:hover { opacity: 0.8; transform: translateX(-4px); }
 
   /* ── HERO ── */
   .hero {
@@ -187,7 +177,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
     border-radius: 10px;
     padding: 28px 32px;
     background: rgba(255,255,255,0.025);
-    margin-bottom: 32px;
   }
   .signal-label {
     font-family: 'DM Mono', monospace;
@@ -210,15 +199,6 @@ const formattedDate = post.data.pubDate.toLocaleDateString('id-ID', {
     transition: opacity 0.2s;
   }
   .signal-cta:hover { opacity: 0.8; }
-
-  .footer-back {
-    display: block; text-align: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 1.5px;
-    color: var(--muted); text-decoration: none;
-    opacity: 0.2; transition: opacity 0.2s;
-  }
-  .footer-back:hover { opacity: 0.7; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
