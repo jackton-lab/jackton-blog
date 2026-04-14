@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://blog.jackton.xyz',
+  site: 'https://blog.jackton.xyz/',
   integrations: [sitemap()],
   image: {
     domains: ['images.unsplash.com', 'i.ibb.co', 'ibb.co'],
