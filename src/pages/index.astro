@@ -179,6 +179,10 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
     line-height: 1.45;
     letter-spacing: -0.02em;
     color: var(--fg);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .card-desc {
     font-size: 12.5px;
